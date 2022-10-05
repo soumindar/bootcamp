@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Percabangan Ternary
+    </title>
+</head>
+<body>
+    <script>
+
+        let jawab = prompt("Pilih angka 1-5");
+        jawab = parseInt(jawab);
+        let hadiah = "";
+
+        (jawab == 1) ? hadiah = "10.000" : 
+                (jawab == 2) ? hadiah = "20.000" :
+                (jawab == 3) ? hadiah = "30.000" :
+                (jawab == 4) ? hadiah = "40.000" :
+                (jawab == 5) ? hadiah = "50.000" :
+                document.write("<p>pilihan tidak valid</p>");
+        
+        if (hadiah === "") {
+            document.write("<h2>gagal mendapat hadiah </h2>");
+        } else {
+            document.write("<h2>kamu mendapat " + hadiah + "</h2>");
+        }
+
+        document.write(`pilihan anda adalah: <br> ${jawab} </br>`);
+    </script>
+</body>
+</html>
