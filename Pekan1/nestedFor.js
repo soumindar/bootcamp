@@ -1,12 +1,6 @@
 for (let i = 0; i < 5; i++) {
-    for (let j = 0; j < 5; j++) {
-        if (i == 0 || i == 4) {
-            document.write("*");
-        } else if (j == 0 || j == 4) {
-            document.write("*");
-        } else {
-            document.write(" ");
-        }
+    for (let j = 0; j <= i; j++) {
+        document.write("*");
     }
     document.write("</br>");
 }

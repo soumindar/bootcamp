@@ -1,18 +1,22 @@
-let nums = [2, 3, 6, 6, 5];
-
-let max1 = -1;
-let max2 = -1;
-
-for (i in nums) {
-    if (nums[i] > max1) {
-        max1 = nums[i];
+class Rectangle {
+    constructor(w, h) {
+        this.w = w;
+        this.h = h;
     }
 }
 
-for (i in nums) {
-    if ((nums[i] > max2) && (nums[i] != max1)) {
-        max2 = nums[i];
+class Rectangle {
+    area() {
+        return (this.w * this.h);
     }
 }
 
-console.log(max2);
+class Square extends Rectangle {
+    constructor(s) {
+        this.s = s;
+        super(s, s);
+    }
+}
+
+let rect1 = new Rectangle(2,4);
+console.log(rect1.area());
