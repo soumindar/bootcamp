@@ -1,22 +1,9 @@
-class Rectangle {
-    constructor(w, h) {
-        this.w = w;
-        this.h = h;
-    }
-}
+let re = /((^Mr\.)|(Mrs\.)|(Ms\.)|(Dr\.)|(Er\.))[(a-z)(A-Z)]+/;
 
-class Rectangle {
-    area() {
-        return (this.w * this.h);
-    }
-}
+let re2 = /?![^(a-z)(A-Z)]/;
+let re3 = /^[Mr\.|Mrs\.|Ms\.|Dr\.|Er\.]/;
+let re4 = /(^abc)efd*/;
 
-class Square extends Rectangle {
-    constructor(s) {
-        this.s = s;
-        super(s, s);
-    }
-}
+let s = "Mrs.Y";
 
-let rect1 = new Rectangle(2,4);
-console.log(rect1.area());
+console.log(re2.test(s));
