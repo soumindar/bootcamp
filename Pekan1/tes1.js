@@ -1,9 +1,9 @@
-let re = /((^Mr\.)|(Mrs\.)|(Ms\.)|(Dr\.)|(Er\.))[(a-z)(A-Z)]+/;
+let re = /((^Mr\.)|(^Mrs\.)|(^Ms\.)|(^Dr\.)|(^Er\.))[(a-z)(A-Z)]+$/;
 
-let re2 = /?![^(a-z)(A-Z)]/;
+let re2 = /[^(a-z)(A-Z)]/;
 let re3 = /^[Mr\.|Mrs\.|Ms\.|Dr\.|Er\.]/;
-let re4 = /(^abc)efd*/;
+let re4 = /^[a-zA-Z]+$/;
 
-let s = "Mrs.Y";
+let s = "Ms.asM##rsd";
 
-console.log(re2.test(s));
+console.log(re.test(s));
