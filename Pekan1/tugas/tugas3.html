@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Looping JS
+    </title>
+</head>
+<body>
+    <h1>kalimat anda:</h1>
+    <h1 id='kalimat'> </h1>
+    <script>        
+        let divKalimat = document.getElementById('kalimat');
+        divKalimat.innerHTML = '';
+        let kata = '';
+        do {
+            kata = prompt('masukkan kata untuk disusun menjadi kalimat!\nmasukan x untuk berhenti');
+            if(kata != 'x') {
+                divKalimat.innerHTML += kata + ' ';
+            }
+        } while (kata != 'x');
+
+    </script>
+</body>
+</html>
