@@ -8,14 +8,14 @@
 </head>
 <body>
     <h1>kalimat anda:</h1>
-    <h1 id='kalimat'> </h1>
+    <div id='kalimat'> </div>
     <script>        
         let divKalimat = document.getElementById('kalimat');
         divKalimat.innerHTML = '';
         let kata = '';
         do {
             kata = prompt('masukkan kata untuk disusun menjadi kalimat!\nmasukan x untuk berhenti');
-            if(kata != 'x') {
+            if(kata != 'x' && kata != null) {
                 divKalimat.innerHTML += kata + ' ';
             }
         } while (kata != 'x');
