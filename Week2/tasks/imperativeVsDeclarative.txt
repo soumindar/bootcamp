@@ -1,1 +1,5 @@
 Explain the difference between IMPERATIVE programming Vs DECLARATIVE programming!
+
+
+Presentation:
+https://docs.google.com/presentation/d/1Ad4RJoaqukmKel-SGCTEg_L3fF65qkEPrzhjA0-h-84/edit?usp=sharing
