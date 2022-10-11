@@ -6,40 +6,25 @@
     </title>
 </head>
 <body>
+    <div id="listContainer"></div>
     <input type="text" name="input" id="input"></input>
     <button id="btn" onclick="inputData()">Simpan</button>
-    
+
     <script>
         let items = [];
         function inputData() {
             let input = document.getElementById('input');
             if (input != '') {
                 items.push(input.value);
-                let divTemp = document.createElement('div');
-                divTemp.id = `div${items.length-1}`;
-                divTemp.innerHTML = input.value;
-                
-                let delButton = document.createElement('button');
-                delButton.id = `del${items.length-1}`;
-                delButton.innerHTML = 'Delete';
-                delButton.addEventListener("click", deleteData);
-                divTemp.appendChild(delButton);
-
-                let editButton = document.createElement('button');
-                editButton.id = `edit${items.length-1}`;
-                editButton.innerHTML = 'Edit';
-                editButton.addEventListener('click', editData);
-                divTemp.appendChild(editButton);
-
-                document.body.appendChild(divTemp);
+                printItems();
             }
         }
         
         function deleteData(e) {
             let btn = e.target;
             let itemIndex = btn.id.replace('del', '');
-            let divToBeRemoved = document.getElementById(`div${itemIndex}`);
-            divToBeRemoved.remove();
+            items.splice(itemIndex, 1);
+            printItems();
         }
 
         function editData(e) {
@@ -47,13 +32,31 @@
             let btn = e.target;
             let itemIndex = btn.id.replace('edit', '');
             items[itemIndex] = inputForEdit;
-            printItem();
+            printItems();
         }
 
-        function printItem() {
+        function printItems() {
+            let divListContainer =  document.getElementById('listContainer');
+            divListContainer.innerHTML = '';
+
             for (let i in items) {
-                let divToBePrinted = document.getElementById(`div${i}`);
-                divToBePrinted.innerHTML = items[i];
+                let divTemp = document.createElement('div');
+                divTemp.id = `div${i}`;
+                divTemp.innerHTML = items[i];
+                
+                let delButton = document.createElement('button');
+                delButton.id = `del${i}`;
+                delButton.innerHTML = 'Delete';
+                delButton.addEventListener("click", deleteData);
+                divTemp.appendChild(delButton);
+
+                let editButton = document.createElement('button');
+                editButton.id = `edit${i}`;
+                editButton.innerHTML = 'Edit';
+                editButton.addEventListener('click', editData);
+                divTemp.appendChild(editButton);
+
+                divListContainer.appendChild(divTemp);
             }
         }
     </script>
