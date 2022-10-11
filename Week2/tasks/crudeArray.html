@@ -4,12 +4,20 @@
     <title>
         crude array
     </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
     <input type="text" name="input" id="input"></input>
-    <button id="btn" onclick="inputData()">Simpan</button>
-    <div id="listContainer"></div>
+    <button id="btn" onclick="inputData()" class="btn btn-primary">Simpan</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <ul id="listContainer" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
     
+
     <script>
         let items = [];
         function inputData() {
@@ -17,6 +25,7 @@
             if (input != '') {
                 items.push(input.value);
                 printItems();
+                input.value = '';
             }
         }
         
@@ -28,11 +37,14 @@
         }
 
         function editData(e) {
-            let inputForEdit = prompt("masukkan value baru:");
             let btn = e.target;
             let itemIndex = btn.id.replace('edit', '');
-            items[itemIndex] = inputForEdit;
-            printItems();
+            let inputForEdit = prompt("masukkan value baru:", items[itemIndex]);
+            
+            if (inputForEdit != null) {
+                items[itemIndex] = inputForEdit;
+                printItems();
+            }
         }
 
         function printItems() {
@@ -40,19 +52,22 @@
             divListContainer.innerHTML = '';
 
             for (let i in items) {
-                let divTemp = document.createElement('div');
+                let divTemp = document.createElement('li');
                 divTemp.id = `div${i}`;
-                divTemp.innerHTML = items[i];
-                
+                divTemp.innerHTML = `<p>${items[i]}</p>`;
+                divTemp.className = "list-group-item";
+
                 let delButton = document.createElement('button');
                 delButton.id = `del${i}`;
                 delButton.innerHTML = 'Delete';
+                delButton.className = "btn btn-danger mr-5";
                 delButton.addEventListener("click", deleteData);
                 divTemp.appendChild(delButton);
 
                 let editButton = document.createElement('button');
                 editButton.id = `edit${i}`;
                 editButton.innerHTML = 'Edit';
+                editButton.className = "btn btn-success";
                 editButton.addEventListener('click', editData);
                 divTemp.appendChild(editButton);
 
