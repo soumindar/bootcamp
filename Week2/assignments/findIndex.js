@@ -8,7 +8,7 @@ const findIndex = (array, searchKey) => {
             indexFound = i;
         }
     }
-    return indexFound
+    return indexFound;
 }
 
 console.log(findIndex(items, searchKey));
