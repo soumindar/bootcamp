@@ -9,18 +9,6 @@ const findIndex = (array, searchKey) => {
         }
     }
     return indexFound;
-}
+};
 
 console.log(findIndex(items, searchKey));
-
-const findIndex2 = function (array, searchKey) {
-    let indexFound = -1;
-    for (let i in array) {
-        if (array[i] == searchKey) {
-            indexFound = i;
-        }
-    }
-    return indexFound;
-}
-
-console.log(findIndex2(items, 'penggaris'));
