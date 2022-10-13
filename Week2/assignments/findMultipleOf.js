@@ -1,10 +1,9 @@
 let nums = [1, 3, 5, 4, 6, 10, 9, 24, 8, 7, 66];
-let searchKey = 3;
 
-const findMulOf = (array, searchKey) => {
+const findMulOf = (array, num) => {
     let arrayAnswer = [];
     for (let i in array) {
-        if (array[i] % searchKey == 0) {
+        if (array[i] % num == 0) {
             arrayAnswer.push(array[i]);
         }
     }
@@ -12,4 +11,4 @@ const findMulOf = (array, searchKey) => {
     return arrayAnswer;
 }
 
-console.log(findMulOf(nums, searchKey));
+console.log(findMulOf(nums, 3));
