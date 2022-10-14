@@ -1,3 +1,12 @@
-let items = ['buku', 'pensil', 'penggaris'];
-let newArr = items.map(item => `${item}!`);
-console.log(newArr);
+const createObj = (person, age) => ({...person, age});
+
+const person = {
+    name: 'sou',
+    age: 24,
+    city: 'pwt'
+}
+
+
+let newPerson = {...person, age: 22};
+
+console.log(person, newPerson);
