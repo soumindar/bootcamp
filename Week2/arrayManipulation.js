@@ -10,3 +10,6 @@ let item2 = 'qwe';
 [item1, item2] = [item2, item1];
 
 console.log(item1, item2);
+
+items.splice(4, 0, item1);
+console.log(items);
