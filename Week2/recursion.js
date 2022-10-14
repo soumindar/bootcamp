@@ -1,3 +1,6 @@
-for (let i = 10; i >= 0; i--) {
-    console.log(i);
+const factorialOf = n => {
+    if (n == 0) return 1;
+    if (n > 0) return n*factorialOf(n-1);
 }
+
+console.log(factorialOf(5));
