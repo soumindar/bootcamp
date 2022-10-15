@@ -6,7 +6,6 @@ const person = {
     city: 'pwt'
 }
 
-
 let newPerson = {...person, age: 22};
 
 console.log(person, newPerson);
