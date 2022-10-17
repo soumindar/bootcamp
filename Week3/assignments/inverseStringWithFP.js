@@ -28,7 +28,7 @@ console.log(reversedStringsFP);
 console.log(reversedStringsRecursive);
 
 // 'qwe'
-// (2, 'qwe') = e + (1, 'qwe') = 'e' + 'wq' = 'ewq'
-// (1, 'qwe') = w + (0, 'qwe') = 'w' + 'q' = 'wq'
-// (0, 'qwe') = q + (-1, 'qwe') = 'q' + '' = 'q'
+// (2, 'qwe') = 'e' + (1, 'qwe') = 'e' + 'wq' = 'ewq'
+// (1, 'qwe') = 'w' + (0, 'qwe') = 'w' + 'q' = 'wq'
+// (0, 'qwe') = 'q' + (-1, 'qwe') = 'q' + '' = 'q'
 // (-1, 'qwe') = ''
