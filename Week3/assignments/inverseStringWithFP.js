@@ -9,7 +9,7 @@ const reversingStr = str => {
     return revStr;
 }
 
-const reversingStrRecursive = (i, str) => (i >= 0) ? (str[i] + reversingStrRecursive(--i, str)) : '';
+const reversingStrRecursive = (i, str) => (i < 0) ? '' : (str[i] + reversingStrRecursive(--i, str));
 
 const reversingStrRecExplained = function (i, str) {
     if (i < 0) {
