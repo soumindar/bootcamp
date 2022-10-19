@@ -116,5 +116,6 @@ function sortData(order) {
         [userData[i], userData[swapThis]] = [userData[swapThis], userData[i]];
     }
 
+    userData.sort(user)
     printData();
 }
