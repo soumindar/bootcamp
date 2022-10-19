@@ -89,6 +89,11 @@ function editData(n) {
                 if ((newNik=='') || (newName =='') || (newAge =='')) {
                     throw 'Wrong input format!';
                 }
+                
+                let re = /^\d{16}$/;
+                if (!re.test(newNik)) {
+                    throw 'NIK must be 16 digit positive integer';
+                }
 
                 newAge = Number(newAge);
                 if ((isNaN(newAge)) || (Math.floor(newAge) - newAge != 0) || (newAge <= 0)) {
@@ -109,7 +114,7 @@ function editData(n) {
             editData(n);
         }
     } catch (error) {
-        alert(error);
+        console.log(error);
     }
 }
 
