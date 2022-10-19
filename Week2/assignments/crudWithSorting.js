@@ -30,7 +30,7 @@ function inputData() {
         str += 'cannot be empty!';
         alert(str);
     } else {
-        userData.push([nikInput.value, nameInput.value, ageInput.value]);
+        userData.push({nik: nikInput.value, name: nameInput.value, age: ageInput.value});
         nikInput.value = '';
         nameInput.value = '';
         ageInput.value = '';
@@ -44,13 +44,16 @@ function deleteData(n) {
 }
 
 function editData(n) {
-    let strEdit = prompt(`Input new data with format: "NIK,name,age"`, userData[n]);
+    let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik}, ${userData[n].name}, ${userData[n].age}`);
     let arrEdit = strEdit.split(',');
 
     if (arrEdit.length == 3) {
-        for (let i in arrEdit) {
-            userData[n][i] = arrEdit[i];
-        }
+        let objEdit = {
+            nik: arrEdit[0],
+            name: arrEdit[1],
+            age: arrEdit[2]
+        };
+        userData[n] = objEdit;
         printData();
     } else {
         alert('Wrong input!');
@@ -80,9 +83,9 @@ function printData() {
 
         let tableRow = `<tr>
                             <th scope="row">${number}.</th>
-                            <td>${userData[i][0]}</td>
-                            <td>${userData[i][1]}</td>
-                            <td>${userData[i][2]}</td>
+                            <td>${userData[i].nik}</td>
+                            <td>${userData[i].name}</td>
+                            <td>${userData[i].age}</td>
                             <td>
                                 ${deleteButton}
                                 ${editButton}
@@ -102,11 +105,11 @@ function sortData(order) {
         let max = -1;
         let swapThis = -1;
         for (let j = i; j < userData.length; j++) {
-            if ((userData[j][0] < min) && (isAscending)) {
-                min = userData[j][0];
+            if ((userData[j].nik < min) && (isAscending)) {
+                min = userData[j].nik;
                 swapThis = j;
-            } else if ((userData[j][0] > max) && (isDescending)) {
-                max = userData[j][0];
+            } else if ((userData[j].nik > max) && (isDescending)) {
+                max = userData[j].nik;
                 swapThis = j;
             }
         }
