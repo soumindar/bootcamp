@@ -1,5 +1,5 @@
 try {
     nonExistentFunction();
-} catch(errorVariable) {
+} catch (errorVariable) {
     console.log(errorVariable);
 }
