@@ -1,40 +1,31 @@
 let userData = [];
+
 function inputData() {
-    let nikInput = document.getElementById('nikInput');
-    let nameInput = document.getElementById('nameInput');
-    let ageInput = document.getElementById('ageInput');
+    let nikInputObj = document.getElementById('nikInput');
+    let nameInputObj = document.getElementById('nameInput');
+    let ageInputObj = document.getElementById('ageInput');
 
-    let strAlert = [];
-    let showAlert = 0;
-    if (nikInput =='') {
-        strAlert.push('NIK');
-        showAlert = 1;
-    }
-    if (nameInput =='') {
-        strAlert.push('Name');
-        showAlert = 1;
-    }
-    if (ageInput =='') {
-        strAlert.push('Age');
-        showAlert = 1;
-    }
+    let nikInput = nikInputObj.value;
+    let nameInput = nameInputObj.value;
+    let ageInput = ageInputObj.value;
 
-    if (showAlert) {
-        let str = "";
-        for (let i in strAlert) {
-            str += strAlert[i];
-            if (i < strAlert.length-1) {
-                str += ', ';
-            }
+    try {
+        if ((nikInput =='') || (nameInput =='') || (ageInput =='')) {
+            throw 'Input fields cannot be empty!';
         }
-        str += 'cannot be empty!';
-        alert(str);
-    } else {
-        userData.push({nik: nikInput.value, name: nameInput.value, age: ageInput.value});
-        nikInput.value = '';
-        nameInput.value = '';
-        ageInput.value = '';
+
+        ageInput = Number(ageInput);
+        if ((isNaN(ageInput)) || (Math.floor(ageInput) - ageInput != 0) || (ageInput <= 0)) {
+            throw 'Age must be a positive integer';
+        }
+
+        userData.push({nik: nikInput, name: nameInput, age: ageInput});
+        nikInputObj.value = '';
+        nameInputObj.value = '';
+        ageInputObj.value = '';
         printData();
+    } catch (error) {
+        alert(error);
     }
 }
 
@@ -44,21 +35,43 @@ function deleteData(n) {
 }
 
 function editData(n) {
-    let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik}, ${userData[n].name}, ${userData[n].age}`);
-    let arrEdit = strEdit.split(',');
+    try {
+        let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik}, ${userData[n].name}, ${userData[n].age}`);
+        
+        if (strEdit != null) {
+            let arrEdit = strEdit.split(',');
 
-    if (arrEdit.length == 3) {
-        let objEdit = {
-            nik: arrEdit[0],
-            name: arrEdit[1],
-            age: arrEdit[2]
-        };
-        userData[n] = objEdit;
-        printData();
-    } else {
-        alert('Wrong input!');
+            if (arrEdit.length != 3) {
+                throw 'Wrong input format!';
+            }
+
+            let newNik = arrEdit[0];
+            let newName = arrEdit[1];
+            let newAge = arrEdit[2];
+
+            if ((newNik=='') || (newName =='') || (newAge =='')) {
+                throw 'Wrong input format!';
+            }
+
+            newAge = Number(newAge);
+            if ((isNaN(newAge)) || (Math.floor(newAge) - newAge != 0) || (newAge <= 0)) {
+                throw 'Age must be a positive integer';
+            }
+
+            let newData = {
+                nik: newNik,
+                name: newName,
+                age: newAge
+            };
+            userData[n] = newData;
+
+            printData();
+        }
+    } catch (error) {
+        alert(error);
         editData(n);
     }
+
 }
 
 function printData() {
@@ -115,7 +128,7 @@ function sortData(order) {
         }
         [userData[i], userData[swapThis]] = [userData[swapThis], userData[i]];
     }
-
-    userData.sort(user)
     printData();
+
+    // userData.sort((a, b) => a.nik - b.nik);
 }
