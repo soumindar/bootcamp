@@ -10,8 +10,16 @@ function inputData() {
     let ageInput = ageInputObj.value;
 
     try {
-        if ((nikInput =='') || (nameInput =='') || (ageInput =='')) {
-            throw 'Input fields cannot be empty!';
+        if (nikInput =='') {
+            throw 'NIK cannot be empty!';
+        }
+
+        if (nameInput =='') {
+            throw 'Name cannot be empty!';
+        }
+
+        if (ageInput =='') {
+            throw 'Age cannot be empty!';
         }
 
         let re = /^\d{16}$/;
