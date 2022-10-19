@@ -30,48 +30,63 @@ function inputData() {
 }
 
 function deleteData(n) {
-    userData.splice(n, 1);
-    printData();
+    try {
+        if ((n == null) || (n == undefined) || (n < 0) || (n >= userData.length)) {
+            throw 'Delete function argument is wrong!';
+        }
+        userData.splice(n, 1);
+        printData();
+    } catch (error) {
+        alert(error);
+    }
+    
 }
 
 function editData(n) {
     try {
-        let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik}, ${userData[n].name}, ${userData[n].age}`);
-        
-        if (strEdit != null) {
-            let arrEdit = strEdit.split(',');
+        if ((n == null) || (n == undefined) || (n < 0) || (n >= userData.length)) {
+            throw 'Edit function argument is wrong!';
+        }
 
-            if (arrEdit.length != 3) {
-                throw 'Wrong input format!';
+        try {
+            let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik},${userData[n].name},${userData[n].age}`);
+
+            if (strEdit != null) {
+                let arrEdit = strEdit.split(',');
+
+                if (arrEdit.length != 3) {
+                    throw 'Wrong input format!';
+                }
+
+                let newNik = arrEdit[0];
+                let newName = arrEdit[1];
+                let newAge = arrEdit[2];
+
+                if ((newNik=='') || (newName =='') || (newAge =='')) {
+                    throw 'Wrong input format!';
+                }
+
+                newAge = Number(newAge);
+                if ((isNaN(newAge)) || (Math.floor(newAge) - newAge != 0) || (newAge <= 0)) {
+                    throw 'Age must be a positive integer';
+                }
+
+                let newData = {
+                    nik: newNik,
+                    name: newName,
+                    age: newAge
+                };
+                userData[n] = newData;
+
+                printData();
             }
-
-            let newNik = arrEdit[0];
-            let newName = arrEdit[1];
-            let newAge = arrEdit[2];
-
-            if ((newNik=='') || (newName =='') || (newAge =='')) {
-                throw 'Wrong input format!';
-            }
-
-            newAge = Number(newAge);
-            if ((isNaN(newAge)) || (Math.floor(newAge) - newAge != 0) || (newAge <= 0)) {
-                throw 'Age must be a positive integer';
-            }
-
-            let newData = {
-                nik: newNik,
-                name: newName,
-                age: newAge
-            };
-            userData[n] = newData;
-
-            printData();
+        } catch (error) {
+            alert(error);
+            editData(n);
         }
     } catch (error) {
         alert(error);
-        editData(n);
     }
-
 }
 
 function printData() {
