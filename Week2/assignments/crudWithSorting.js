@@ -14,9 +14,9 @@ function inputData() {
             throw 'Input fields cannot be empty!';
         }
 
-        let re = /^\d+$/;
-        if (re.test(nikInput)) {
-
+        let re = /^\d{16}$/;
+        if (!re.test(nikInput)) {
+            throw 'NIK must be 16 digit positive integer';
         }
 
         ageInput = Number(ageInput);
