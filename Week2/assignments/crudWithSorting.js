@@ -14,6 +14,11 @@ function inputData() {
             throw 'Input fields cannot be empty!';
         }
 
+        let re = /^\d+$/;
+        if (re.test(nikInput)) {
+
+        }
+
         ageInput = Number(ageInput);
         if ((isNaN(ageInput)) || (Math.floor(ageInput) - ageInput != 0) || (ageInput <= 0)) {
             throw 'Age must be a positive integer';
