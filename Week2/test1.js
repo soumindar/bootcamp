@@ -1,17 +1,5 @@
-try {
-    try {
-        try {
-            console.log('try3');
-        } catch {
-            console.log('error3')
-        }
-        console.log('try2');
-    } catch (e) {
-        console.log('error2');
-    } finally {
-        console.log('finally2');
-    }
-    console.log('try1');
-} catch {
-    console.log('catch1');
-}
+let a = '123';
+
+let re = /(^\d+$){3}/;
+
+console.log(re.test(a));
