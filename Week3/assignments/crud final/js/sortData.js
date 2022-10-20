@@ -1,4 +1,5 @@
-import {userData} as import1 from './userData.js';
+import {userData} from '../data/userData.js';
+import {printData} from './main.js';
 
 function sortData(element) {
     try {
