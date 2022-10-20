@@ -1,15 +1,18 @@
-let userData = [];
+let {userData} = require('./userData');
+const {sortData} = require('./sortData');
+console.log(userData);
+printData();
 
 function inputData() {
-    let nikInputObj = document.getElementById('nikInput');
-    let nameInputObj = document.getElementById('nameInput');
-    let ageInputObj = document.getElementById('ageInput');
-
-    let nikInput = nikInputObj.value;
-    let nameInput = nameInputObj.value;
-    let ageInput = ageInputObj.value;
-
     try {
+        let nikInputObj = document.getElementById('nikInput');
+        let nameInputObj = document.getElementById('nameInput');
+        let ageInputObj = document.getElementById('ageInput');
+
+        let nikInput = nikInputObj.value;
+        let nameInput = nameInputObj.value;
+        let ageInput = ageInputObj.value;
+
         let emptyField = [];
         let isEmpty = 0;
         if (nikInput =='') {
@@ -28,7 +31,7 @@ function inputData() {
         }
 
         if (isEmpty) {
-            strAlert = emptyField.join(', ');
+            let strAlert = emptyField.join(', ');
             strAlert += ' cannot be empty';
             throw strAlert;
         }
@@ -151,28 +154,4 @@ function printData() {
         
         tableBody.innerHTML += tableRow;
     }
-}
-
-function sortData(order) {
-    isAscending = (order == 'ascending');
-    isDescending = (order == 'descending');
-
-    for (let i in userData) {
-        let min = 999999;
-        let max = -1;
-        let swapThis = -1;
-        for (let j = i; j < userData.length; j++) {
-            if ((userData[j].nik < min) && (isAscending)) {
-                min = userData[j].nik;
-                swapThis = j;
-            } else if ((userData[j].nik > max) && (isDescending)) {
-                max = userData[j].nik;
-                swapThis = j;
-            }
-        }
-        [userData[i], userData[swapThis]] = [userData[swapThis], userData[i]];
-    }
-    printData();
-
-    // userData.sort((a, b) => a.nik - b.nik);
 }
