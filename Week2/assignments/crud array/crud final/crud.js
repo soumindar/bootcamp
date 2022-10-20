@@ -7,7 +7,9 @@ let sortData = import2.sortData;
 printData();
 
 try {
-    document.getElementById("inputBtn").addEventListener('click', inputData());
+    document.getElementById("inputBtn").addEventListener('click', inputData);
+    document.getElementById("sortAscending").addEventListener('click', sortData);
+    document.getElementById("sortDescending").addEventListener('click', sortData);
 } catch(e) {
     console.log(e);
 }
@@ -65,12 +67,14 @@ function inputData() {
     }
 }
 
-function deleteData(n) {
+function deleteData(element) {
     try {
-        if ((n == null) || (n == undefined) || (n < 0) || (n >= userData.length)) {
+        let button = element.target;
+        let index = button.id.replace('delBtn', '');
+        if ((index == null) || (index == undefined) || (index < 0) || (index >= userData.length)) {
             throw 'Delete function argument is wrong!';
         }
-        userData.splice(n, 1);
+        userData.splice(index, 1);
         printData();
     } catch (error) {
         alert(error);
@@ -78,14 +82,17 @@ function deleteData(n) {
     
 }
 
-function editData(n) {
+function editData(element) {
     try {
-        if ((n == null) || (n == undefined) || (n < 0) || (n >= userData.length)) {
+        let button = element.target;
+        let index = button.id.replace('editBtn', '');
+        if ((index == null) || (index == undefined) || (index < 0) || (index >= userData.length)) {
             throw 'Edit function argument is wrong!';
         }
 
         try {
-            let strEdit = prompt(`Input new data with format: "NIK,name,age"`, `${userData[n].nik},${userData[n].name},${userData[n].age}`);
+            let strPrompt = `${userData[index].nik},${userData[index].name},${userData[index].age}`;
+            let strEdit = prompt(`Input new data with format: "NIK,name,age"`, strPrompt);
 
             if (strEdit != null) {
                 let arrEdit = strEdit.split(',');
@@ -117,7 +124,7 @@ function editData(n) {
                     name: newName,
                     age: newAge
                 };
-                userData[n] = newData;
+                userData[index] = newData;
 
                 printData();
             }
@@ -140,14 +147,12 @@ function printData() {
                                 id="delBtn${i}""
                                 type="button"
                                 class="btn btn-danger"
-                                onclick="deleteData(${i})"
                             >Delete</button>`;
 
         let editButton =    `<button
                                 id="editBtn${i}"
                                 type="button"
                                 class="btn btn-success"
-                                onclick="editData(${i})"
                             >Edit</button>`;
 
         let tableRow = `<tr>
@@ -162,5 +167,13 @@ function printData() {
                         </tr>`;
         
         tableBody.innerHTML += tableRow;
+
+        try {
+            document.getElementById(`delBtn${i}`).addEventListener('click', deleteData);
+            document.getElementById(`editBtn${i}`).addEventListener('click', editData);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 }

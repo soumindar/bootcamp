@@ -1,11 +1,25 @@
-function sortData(order) {
-    isAscending = (order == 'ascending');
-    isDescending = (order == 'descending');
+import {userData} as import1 from './userData.js';
 
-    if (isAscending) userData.sort((a, b) => a.nik - b.nik);
-    if (isDescending) userData.sort((a, b) => b.nik - a.nik);
+function sortData(element) {
+    try {
+        let button = element.target;
+        let isAscending = (button.id == 'sortAscending');
+        let isDescending = (button.id == 'sortDescending');
+
+        if (isAscending) {
+            console.log('sort as');
+            userData.sort((a, b) => a.nik - b.nik);
+        }
+        if (isDescending) {
+            console.log('sort des');
+            userData.sort((a, b) => b.nik - a.nik);
+        }
+
+        printData();
+    } catch(error) {
+        console.log(error);
+    }
     
-    printData();
 }
 
 export {sortData};
