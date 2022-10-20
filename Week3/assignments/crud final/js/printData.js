@@ -10,15 +10,17 @@ const printData = () => {
         for (let i in userData) {
             let number = Number(i)+1;
             let deleteButton =  `<button 
-                                    id="delBtn${i}""
+                                    id="delBtn${i}"
+                                    index="${i}"
                                     type="button"
-                                    class="btn btn-danger"
+                                    class="btn btn-danger delBtn"
                                 >Delete</button>`;
 
             let editButton =    `<button
                                     id="editBtn${i}"
+                                    index="${i}"
                                     type="button"
-                                    class="btn btn-success"
+                                    class="btn btn-success editBtn"
                                 >Edit</button>`;
 
             let tableRow = `<tr>
@@ -32,15 +34,7 @@ const printData = () => {
                                 </td>
                             </tr>`;
             
-            tableBody.innerHTML += tableRow;
-
-            try {
-                document.getElementById(`delBtn${i}`).addEventListener('click', deleteData);
-                document.getElementById(`editBtn${i}`).addEventListener('click', editData);
-            } catch (error) {
-                console.log(error);
-            }
-            
+            tableBody.innerHTML += tableRow;           
         }
     } catch(error) {
         console.log(error);

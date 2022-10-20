@@ -1,10 +1,10 @@
 import { userData } from "../data/userData.js";
 import { printData } from "./printData.js";
 
-const deleteData = (element) => {
+const deleteData = (index) => {
     try {
-        let button = element.target;
-        let index = button.id.replace('delBtn', '');
+        // let button = element.target;
+        // let index = button.id.replace('delBtn', '');
         if ((index == null) || (index == undefined) || (index < 0) || (index >= userData.length)) {
             throw 'Delete function argument is wrong!';
         }
