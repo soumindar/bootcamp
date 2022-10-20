@@ -1,5 +1,5 @@
-import {userData} from '../data/userData.js';
-import {printData} from './main.js';
+import { userData } from '../data/userData.js';
+import { printData } from './printData.js';
 
 function sortData(element) {
     try {
@@ -7,14 +7,8 @@ function sortData(element) {
         let isAscending = (button.id == 'sortAscending');
         let isDescending = (button.id == 'sortDescending');
 
-        if (isAscending) {
-            console.log('sort as');
-            userData.sort((a, b) => a.nik - b.nik);
-        }
-        if (isDescending) {
-            console.log('sort des');
-            userData.sort((a, b) => b.nik - a.nik);
-        }
+        if (isAscending) userData.sort((a, b) => a.nik - b.nik);
+        if (isDescending) userData.sort((a, b) => b.nik - a.nik);
 
         printData();
     } catch(error) {

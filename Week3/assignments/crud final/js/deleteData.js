@@ -1,3 +1,6 @@
+import { userData } from "../data/userData.js";
+import { printData } from "./printData.js";
+
 const deleteData = (element) => {
     try {
         let button = element.target;

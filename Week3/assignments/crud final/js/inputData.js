@@ -1,3 +1,6 @@
+import { userData } from "../data/userData.js";
+import { printData } from "./printData.js";
+
 const inputData = () => {
     try {
         let nikInputObj = document.getElementById('nikInput');
