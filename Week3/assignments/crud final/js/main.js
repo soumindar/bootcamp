@@ -15,19 +15,22 @@ try {
     let deleteButtons = document.querySelectorAll('.delBtn');
     let editButtons = document.querySelectorAll('.editBtn');
 
+    console.log(deleteButtons);
+    console.log(editButtons);
+
     deleteButtons.forEach(element => {
-        element.addEventListener('click', element => {
-            let index = element.getAttribute('index');
-            deleteData(index);
-        });
+        let index = element.getAttribute('index');
+        console.log(index);
+        element.addEventListener('click', deleteData(index));
     });
 
     editButtons.forEach(element => {
-        element.addEventListener('click', element => {
-            let index = element.getAttribute('index');
-            editData(index);
-        });
+        let index = element.getAttribute('index');
+        console.log(index);
+        element.addEventListener('click', e => editData(index));
     });
+    
+    printData();
 } catch(e) {
     console.log(e);
 }
