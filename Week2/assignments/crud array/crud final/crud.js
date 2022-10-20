@@ -6,6 +6,12 @@ let sortData = import2.sortData;
 
 printData();
 
+try {
+    document.getElementById("inputBtn").addEventListener('click', inputData());
+} catch(e) {
+    console.log(e);
+}
+
 function inputData() {
     try {
         let nikInputObj = document.getElementById('nikInput');
