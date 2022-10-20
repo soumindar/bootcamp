@@ -1,6 +1,9 @@
-let {userData} = require('./userData');
-const {sortData} = require('./sortData');
-console.log(userData);
+import * as import1 from './userData.js';
+import * as import2 from './sortData.js';
+
+let userData = import1.userData;
+let sortData = import2.sortData;
+
 printData();
 
 function inputData() {

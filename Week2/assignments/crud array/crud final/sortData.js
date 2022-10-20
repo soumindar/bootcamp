@@ -8,4 +8,4 @@ function sortData(order) {
     printData();
 }
 
-module.exports = {sortData};
+export {sortData};
