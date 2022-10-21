@@ -1,9 +1,9 @@
 import { userData } from '../data/userData.js';
 import { printData } from './printData.js';
 
-function sortData(element) {
+function sortData(event) {
     try {
-        let button = element.target;
+        let button = event.target;
         let isAscending = (button.id == 'sortAscending');
         let isDescending = (button.id == 'sortDescending');
 

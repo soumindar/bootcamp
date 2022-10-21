@@ -10,15 +10,15 @@ const printData = () => {
         for (let i in userData) {
             let number = Number(i)+1;
             let deleteButton =  `<button 
-                                    id="delBtn${i}"
-                                    index="${i}"
+                                    id="delBtn${i}""
+                                    data-index="${i}"
                                     type="button"
                                     class="btn btn-danger delBtn"
                                 >Delete</button>`;
 
             let editButton =    `<button
                                     id="editBtn${i}"
-                                    index="${i}"
+                                    data-index="${i}"
                                     type="button"
                                     class="btn btn-success editBtn"
                                 >Edit</button>`;
@@ -34,7 +34,7 @@ const printData = () => {
                                 </td>
                             </tr>`;
             
-            tableBody.innerHTML += tableRow;           
+            tableBody.innerHTML += tableRow;
         }
     } catch(error) {
         console.log(error);

@@ -12,25 +12,27 @@ try {
     printData();
 
 
-    let deleteButtons = document.querySelectorAll('.delBtn');
-    let editButtons = document.querySelectorAll('.editBtn');
+    // let deleteButtons = document.querySelectorAll('.delBtn');
+    // let editButtons = document.querySelectorAll('.editBtn');
 
-    console.log(deleteButtons);
-    console.log(editButtons);
+    // deleteButtons.forEach((btn) => {
+    //         btn.addEventListener('click', () => {
+    //             console.log('delete clicked');
+    //         });
+    //     }
+    // );
 
-    deleteButtons.forEach(element => {
-        let index = element.getAttribute('index');
-        console.log(index);
-        element.addEventListener('click', deleteData(index));
-    });
+    let tableBody = document.querySelectorAll('#tableBody');
+    console.log(tableBody);
 
-    editButtons.forEach(element => {
-        let index = element.getAttribute('index');
-        console.log(index);
-        element.addEventListener('click', e => editData(index));
-    });
-    
-    printData();
+    tableBody.addEventListener('click', (event) => {
+        console.log(event.dataset.index);
+        // if (event.srcElement.hasAttributes('index')) {
+        //     let index = element.srcElement.attribute['index'].value;
+            
+        // }
+    })
+
 } catch(e) {
     console.log(e);
 }
