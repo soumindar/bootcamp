@@ -22,15 +22,18 @@ try {
     //     }
     // );
 
-    let tableBody = document.querySelectorAll('#tableBody');
+    let tableBody = document.querySelector('#tableBody');
     console.log(tableBody);
 
     tableBody.addEventListener('click', (event) => {
-        console.log(event.dataset.index);
-        // if (event.srcElement.hasAttributes('index')) {
-        //     let index = element.srcElement.attribute['index'].value;
-            
-        // }
+        if (event.srcElement.classList.contains('delBtn')) {
+            let index = event.srcElement.getAttribute('data-index');
+            deleteData(index);
+        }
+        if (event.srcElement.classList.contains('editBtn')) {
+            let index = event.srcElement.getAttribute('data-index');
+            editData(index);
+        }
     })
 
 } catch(e) {

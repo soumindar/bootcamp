@@ -1,10 +1,10 @@
 import { userData } from "../data/userData.js";
 import { printData } from "./printData.js";
 
-const editData = (event) => {
+const editData = (index) => {
     try {
-        let button = event.target;
-        let index = button.id.replace('editBtn', '');
+        // let button = event.target;
+        // let index = button.id.replace('editBtn', '');
         if ((index == null) || (index == undefined) || (index < 0) || (index >= userData.length)) {
             throw 'Edit function argument is wrong!';
         }
@@ -49,7 +49,7 @@ const editData = (event) => {
             }
         } catch (error) {
             alert(error);
-            editData(n);
+            editData(index);
         }
     } catch (error) {
         console.log(error);
