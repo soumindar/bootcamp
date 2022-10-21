@@ -15,6 +15,7 @@ try {
     // let deleteButtons = document.querySelectorAll('.delBtn');
     // let editButtons = document.querySelectorAll('.editBtn');
 
+    // console.log(deleteButtons);
     // deleteButtons.forEach((btn) => {
     //         btn.addEventListener('click', () => {
     //             console.log('delete clicked');
@@ -22,19 +23,15 @@ try {
     //     }
     // );
 
-    let tableBody = document.querySelector('#tableBody');
-    console.log(tableBody);
 
-    tableBody.addEventListener('click', (event) => {
-        if (event.srcElement.classList.contains('delBtn')) {
-            let index = event.srcElement.getAttribute('data-index');
-            deleteData(index);
-        }
-        if (event.srcElement.classList.contains('editBtn')) {
-            let index = event.srcElement.getAttribute('data-index');
-            editData(index);
-        }
-    })
+    // WORKED
+    let tableBody = document.querySelector('#tableBody');
+
+    tableBody.addEventListener('click', (event) => event.srcElement.classList.contains('delBtn') ?
+                                                    deleteData(event) :
+                                                    event.srcElement.classList.contains('editBtn') ?
+                                                    editData(event) : false
+    )
 
 } catch(e) {
     console.log(e);

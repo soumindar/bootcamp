@@ -10,7 +10,7 @@ const printData = () => {
         for (let i in userData) {
             let number = Number(i)+1;
             let deleteButton =  `<button 
-                                    id="delBtn${i}""
+                                    id="delBtn${i}"
                                     data-index="${i}"
                                     type="button"
                                     class="btn btn-danger delBtn"
