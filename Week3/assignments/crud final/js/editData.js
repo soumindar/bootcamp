@@ -49,7 +49,7 @@ const editData = (event) => {
             }
         } catch (error) {
             alert(error);
-            editData(index);
+            editData(event);
         }
     } catch (error) {
         console.log(error);
