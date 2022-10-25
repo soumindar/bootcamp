@@ -9,31 +9,35 @@ const second = document.querySelector('.second')
 const third = document.querySelector('.third')
 const btn = document.querySelector('.btn')
 
-const changeFirst = new Promise(() => {
-    btn.addEventListener('click', () => {
-        setTimeout(() => {
-            first.style.color = 'red'
-        }, 1000);
-    });
+
+
+const promise1 = new Promise((resolve) => {
+    setTimeout(() => {
+        first.style.color = 'red';
+    }, 1000);
+
+    resolve();
 });
 
+const changeSecond = () => {
+    setTimeout(() => {
+        second.style.color = 'blue';
+    }, 3000);
 
+    return new Promise(() => {
+        changeThird();
+    });
+}
 
-changeFirst
-    .then(
-        new Promise(() => {
-            setTimeout(() => {
-                second.style.color = 'blue'
-            }, 3000);
-        })
-    )
-    .then(
-        new Promise(() => {
-            setTimeout(() => {
-                third.style.color = 'green'
-            }, 2000);
-        })
-    );
+const changeThird = () => {
+    setTimeout(() => {
+        third.style.color = 'green';
+    }, 2000);
+}
+
+btn.addEventListener('click', () => {
+    // promise1.then(changeSecond);
+});
 
 
 //   setTimeout(() => {

@@ -11,7 +11,7 @@ const promise1 = new Promise(f1);
 
 const printThis = str => {
     console.log(str);
-}
+};
 
 // f1(printThis, printThis);
 
