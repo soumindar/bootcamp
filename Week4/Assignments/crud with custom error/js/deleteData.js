@@ -14,6 +14,6 @@ const deleteData = (event) => {
     } catch (error) {
         console.log(error);
     }   
-}
+};
 
 export {deleteData};
