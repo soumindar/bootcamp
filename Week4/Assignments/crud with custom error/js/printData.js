@@ -37,10 +37,11 @@ const printData = () => {
             tableBody.innerHTML += tableRow;
         }
 
-        $('.editBtn').on('click', function () {
-            editData($(this).data('index'))
+        $('.editBtn').on('click', function() {
+            editData($(this).data('index'));
         });
 
+        
         $('.delBtn').on('click', function () {
             deleteData($(this).data('index'));
         });
