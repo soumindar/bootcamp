@@ -11,14 +11,13 @@ try {
 
     printData();
 
-    let tableBody = document.querySelector('#tableBody');
+    // let tableBody = document.querySelector('#tableBody');
 
-    tableBody.addEventListener('click', (event) => event.srcElement.classList.contains('delBtn') ?
-                                                    deleteData(event) :
-                                                    event.srcElement.classList.contains('editBtn') ?
-                                                    editData(event) : false
-    )
-
+    // tableBody.addEventListener('click', (event) => event.srcElement.classList.contains('delBtn') ?
+    //                                                 deleteData(event) :
+    //                                                 event.srcElement.classList.contains('editBtn') ?
+    //                                                 editData(event) : false
+    // )
 } catch(e) {
     console.log(e);
 }

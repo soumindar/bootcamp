@@ -2,10 +2,10 @@ import { userData } from "../data/userData.js";
 import { printData } from "./printData.js";
 import { IndexError } from "./error.js";
 
-const deleteData = (event) => {
+const deleteData = (index) => {
     try {
-        let button = event.target;
-        let index = button.getAttribute('data-index');;
+        // let button = event.target;
+        // let index = button.getAttribute('data-index');;
         if ((index == null) || (index == undefined) || (index < 0) || (index >= userData.length)) {
             throw new IndexError('Delete function argument is wrong!');
         }
