@@ -34,16 +34,16 @@ btn.addEventListener('click', () => {
             setTimeout(() => {
                 third.style.color = 'green';
             }, 1000);
-        })
+        });
 });
 
 
-//   setTimeout(() => {
+// setTimeout(() => {
 //     first.style.color = 'red'
 //     setTimeout(() => {
-//       second.style.color = 'blue'
-//       setTimeout(() => {
-//         third.style.color = 'green'
-//       }, 2000)
+//         second.style.color = 'blue'
+//         setTimeout(() => {
+//             third.style.color = 'green'
+//         }, 2000)
 //     }, 3000)
-//   }, 1000)
+// }, 1000)

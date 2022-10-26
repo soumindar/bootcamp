@@ -13,9 +13,9 @@ const printThis = str => {
     console.log(str);
 };
 
-promise1.then(printThis);
+// promise1.then(printThis);
 
-const promise2 = new Promise((resolve, reject) => {
+const promise2 = new Promise((resolve) => {
     if (a) {
         setTimeout(() => {
             resolve('ok2');
@@ -33,17 +33,17 @@ console.log(promise2);
 promise2
     .finally(() => {console.log(promise2)})
     .then(str => {
+        console.log(str);
         setTimeout(() => {
-            console.log(str);
             return new Promise((resolve) => {
                 resolve('ok3');
             });
-        }, 1000);
+        }, 2000);
     })
     .then(str => {
         setTimeout(() => {
             console.log(str);
-        }, 500);
+        }, 1000);
     });
 
 console.log('selesai');
