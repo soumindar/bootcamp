@@ -4,39 +4,39 @@
 // after 2s third green; 6s
 // IN SEQUENCE !!!!
 
-const first = document.querySelector('.first')
-const second = document.querySelector('.second')
-const third = document.querySelector('.third')
-const btn = document.querySelector('.btn')
+const first = document.querySelector('.first');
+const second = document.querySelector('.second');
+const third = document.querySelector('.third');
+const btn = document.querySelector('.btn');
 
 
 
-const promise1 = new Promise((resolve) => {
+const promise1 = () => {
     setTimeout(() => {
         first.style.color = 'red';
     }, 1000);
 
-    resolve();
-});
-
-const changeSecond = () => {
-    setTimeout(() => {
-        second.style.color = 'blue';
-    }, 3000);
-
-    return new Promise(() => {
-        changeThird();
+    return new Promise((resolve) => {
+        resolve();
     });
-}
-
-const changeThird = () => {
-    setTimeout(() => {
-        third.style.color = 'green';
-    }, 2000);
-}
+};
 
 btn.addEventListener('click', () => {
-    // promise1.then(changeSecond);
+    promise1()
+        .then(() => {
+            setTimeout(() => {
+                second.style.color = 'blue';
+            }, 3000);
+
+            return new Promise((resolve) => {
+                resolve();
+            });
+        })
+        .then(() => {
+            setTimeout(() => {
+                third.style.color = 'green';
+            }, 2000);
+        })
 });
 
 

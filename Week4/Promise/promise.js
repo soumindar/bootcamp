@@ -13,6 +13,24 @@ const printThis = str => {
     console.log(str);
 };
 
-// f1(printThis, printThis);
+promise1.then(printThis);
 
-promise1.then(printThis).catch(printThis);
+const promise2 = new Promise((resolve, reject) => {
+    if (a) {
+        setTimeout(() => {
+            resolve('ok2');
+        }, 1000);
+    } else {
+        setTimeout(() => {
+            resolve('not ok2');
+        }, 1000);
+    }
+})
+
+console.log('mulai');
+console.log(promise2);
+promise2
+    .finally(() => {console.log(promise2)})
+    .then(printThis)
+    .catch(printThis);
+console.log('selesai');
