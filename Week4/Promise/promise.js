@@ -25,12 +25,25 @@ const promise2 = new Promise((resolve, reject) => {
             resolve('not ok2');
         }, 1000);
     }
-})
+});
 
 console.log('mulai');
 console.log(promise2);
+
 promise2
     .finally(() => {console.log(promise2)})
-    .then(printThis)
-    .catch(printThis);
+    .then(str => {
+        setTimeout(() => {
+            console.log(str);
+            return new Promise((resolve) => {
+                resolve('ok3');
+            });
+        }, 1000);
+    })
+    .then(str => {
+        setTimeout(() => {
+            console.log(str);
+        }, 500);
+    });
+
 console.log('selesai');

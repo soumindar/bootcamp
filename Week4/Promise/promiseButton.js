@@ -12,30 +12,28 @@ const btn = document.querySelector('.btn');
 
 
 const promise1 = () => {
-    setTimeout(() => {
-        first.style.color = 'red';
-    }, 1000);
-
     return new Promise((resolve) => {
-        resolve();
+        setTimeout(() => {
+            first.style.color = 'red';
+            resolve();
+        }, 1000);
     });
 };
 
 btn.addEventListener('click', () => {
     promise1()
         .then(() => {
-            setTimeout(() => {
-                second.style.color = 'blue';
-            }, 3000);
-
             return new Promise((resolve) => {
-                resolve();
+                setTimeout(() => {
+                    second.style.color = 'blue';
+                    resolve();
+                }, 1000);
             });
         })
         .then(() => {
             setTimeout(() => {
                 third.style.color = 'green';
-            }, 2000);
+            }, 1000);
         })
 });
 
