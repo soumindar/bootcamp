@@ -29,7 +29,7 @@ const execPromise = function () {
   console.log('selesai');
 };
 
-execPromise();
+// execPromise();
 
 const asyncExecPromise = async function () {
   console.log('mulai');
@@ -39,3 +39,12 @@ const asyncExecPromise = async function () {
 };
 
 // asyncExecPromise();
+
+console.log('mulai1');
+(async () => {
+  console.log('mulai2');
+  const promise3 = await createPromise();
+  console.log(promise3);
+  console.log('selesai2');
+})();
+console.log('selesai1');
