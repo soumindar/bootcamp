@@ -4,29 +4,23 @@ searchButton.addEventListener('click', function () {
     const inputKeyword = document.querySelector('.input-keyword').value;
     (async () => {
         const response = await fetch('http://www.omdbapi.com/?apikey=a96ee65a&s=' + inputKeyword);
-        (async () => {
-            const data = await response.json();
-            const movies = data.Search;
-            const cards = showCards(movies);
-            const movieContainer = document.querySelector('.movie-container');
-            movieContainer.innerHTML = cards;
-            
-            const detailButtons = document.querySelectorAll('.modal-detail-button');
-            detailButtons.forEach(function (btn) {
-                btn.addEventListener('click', function() {
-                    const imdbId = this.dataset.imdbid;
-                    (async () => {
-                        const response = await fetch('http://www.omdbapi.com/?apikey=a96ee65a&i=' + imdbId);
-                        (async () => {
-                            const movie = await response.json();
-                            const movieDetails = showDetails(movie);
-                            const modal = document.querySelector('.modal-content');
-                            modal.innerHTML = movieDetails;
-                        })();
-                    })();
-                });
+        const data = await response.json();
+        const movies = data.Search;
+        const cards = showCards(movies);
+        const movieContainer = document.querySelector('.movie-container');
+        movieContainer.innerHTML = cards;
+        
+        const detailButtons = document.querySelectorAll('.modal-detail-button');
+        detailButtons.forEach(function (btn) {
+            btn.addEventListener('click', async function() {
+                const imdbId = this.dataset.imdbid;
+                const response = await fetch('http://www.omdbapi.com/?apikey=a96ee65a&i=' + imdbId);
+                const movie = await response.json();
+                const movieDetails = showDetails(movie);
+                const modal = document.querySelector('.modal-content');
+                modal.innerHTML = movieDetails;
             });
-        })();
+        });
     })();
 });
 
