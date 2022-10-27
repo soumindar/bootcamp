@@ -23,16 +23,19 @@ const createPromise = function () {
 
 
 const execPromise = function () {
-  const promise3 = createPromise();
-  console.log('tes');
+  console.log('mulai');
+  const promise3 = createPromise();  
   promise3.then(str => {console.log(str)});
+  console.log('selesai');
 };
 
 execPromise();
 
 const asyncExecPromise = async function () {
+  console.log('mulai');
   const promise3 = await createPromise();
   console.log(promise3);
+  console.log('selesai');
 };
 
 // asyncExecPromise();
