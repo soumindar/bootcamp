@@ -1,8 +1,8 @@
-// import { userData } from "../data/userData.js";
 import { printData } from "./printData.js";
 import { FormatError, TypeError, NullError } from "./error.js";
 
 const inputData = () => {
+    console.log('test1');
     try {
         let nikInputObj = document.getElementById('nikInput');
         let nameInputObj = document.getElementById('nameInput');
@@ -45,13 +45,27 @@ const inputData = () => {
             throw new TypeError('Age must be a positive integer');
         }
 
-        userData.push({nik: nikInput, name: nameInput, age: ageInput});
         nikInputObj.value = '';
         nameInputObj.value = '';
         ageInputObj.value = '';
-        printData();
-    } catch (error) {
-        alert(`(ERROR ${error.code}) ${error.message}`);
+
+        const newUser = {
+            NIK: nikInput,
+            Name: nameInput,
+            Age: ageInput
+        };
+        console.log('test2');
+        (async () => {
+            const post = await fetch('../data/userData.json', {
+                method: 'POST',
+                body: JSON.stringify(newUser)
+            });
+            const responsePost = await post.json();
+            console.log(responsePost);
+            // printData();
+        })();
+    } catch (err) {
+        alert(err);
     }
 }
 
