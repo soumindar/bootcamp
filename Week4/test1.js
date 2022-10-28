@@ -1,4 +1,4 @@
-const arr1 = [1, 2];
+const a = [1, 2];
 
 const f = (arr) => {
   for (let i in arr) {
@@ -7,5 +7,5 @@ const f = (arr) => {
   return arr;
 };
 
-const arr2 = f(arr1);
-console.log(arr1, arr2);
+const b = f(a);
+console.log(a, b);
