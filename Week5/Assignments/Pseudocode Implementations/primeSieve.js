@@ -13,12 +13,8 @@ const primeSieve = n => {
     }
   }
 
-  return A.map((x, index) => {
-    if (x) {
-      return index;
-    }
-    return null;
-  });
+  return A.map((x, index) => (x) ? index : null)
+          .filter(x => (x) ? x : null);
 }
 
 console.log(primeSieve(100));
