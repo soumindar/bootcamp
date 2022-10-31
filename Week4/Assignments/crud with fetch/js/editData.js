@@ -1,4 +1,5 @@
 import { printData } from "./printData.js";
+import { getData } from "./getData.js";
 import { IndexError, FormatError, TypeError, NullError } from "./error.js";
 
 const editData = (id) => {
@@ -40,12 +41,14 @@ const editData = (id) => {
                         },
                         body: JSON.stringify({nik: newNik, nama: newName, alamat: newAddress})
                     });
+                    
                     const responsePut = await put.json();
                     if (responsePut.message === 'success') {
                         alert(`Edit data ${responsePut.message}`);
                     }
-                    
-                    printData();
+
+                    const userData = await getData();
+                    printData(userData);
                 })();
 
             } catch(err) {

@@ -1,4 +1,5 @@
 import { printData } from "./printData.js";
+import { getData } from "./getData.js";
 // import { IndexError } from "./error.js";
 
 const deleteData = (id) => {
