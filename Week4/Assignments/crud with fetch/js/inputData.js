@@ -1,6 +1,6 @@
 import { printData } from "./printData.js";
 import { getData } from "./getData.js";
-import { FormatError, TypeError, NullError } from "./error.js";
+import { FormatError, NullError } from "./error.js";
 
 const inputData = () => {
     try {
