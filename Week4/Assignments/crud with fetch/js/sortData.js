@@ -1,4 +1,4 @@
-import { userData } from '../data/userData.js';
+import { userData } from './getData.js';
 import { printData } from './printData.js';
 
 function sortData(event) {
@@ -10,7 +10,7 @@ function sortData(event) {
         if (isAscending) userData.sort((a, b) => a.nik - b.nik);
         if (isDescending) userData.sort((a, b) => b.nik - a.nik);
 
-        printData();
+        printData(userData);
     } catch(error) {
         console.log(error);
     }
