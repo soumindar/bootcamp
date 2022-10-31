@@ -1,4 +1,5 @@
 import { printData } from "./printData.js";
+import { getData } from "./getData.js";
 import { FormatError, TypeError, NullError } from "./error.js";
 
 const inputData = () => {
@@ -60,7 +61,8 @@ const inputData = () => {
                     alert(`Input data ${responsePost.message}`);
                 }
 
-                printData();
+                const userData = await getData();
+                printData(userData);
             })();
         } catch (err) {
             console.log(err);

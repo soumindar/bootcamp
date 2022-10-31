@@ -10,16 +10,18 @@ const deleteData = (id) => {
         // }
         
         (async () => {
-            const del = await fetch(`http://104.248.154.192:3005/person/${id}`, 
+            const del = await fetch(`http://104.248.154.192:3005/person/${id}`,
             {
                 method: 'DELETE',
             });
+            
             const responseDel = await del.json();
             if (responseDel.message === 'success') {
                 alert(`Delete data ${responseDel.message}`);
             }
 
-            printData();
+            const userData = await getData();
+            printData(userData);
         })();
     } catch (err) {
         console.log(err);
