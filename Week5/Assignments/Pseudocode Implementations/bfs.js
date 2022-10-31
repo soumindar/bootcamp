@@ -12,11 +12,19 @@ const bfs = (G, s) => {
     let u = Q.shift();
     if (!visited[u[0]][u[1]]) {
       visited[u[0]][u[1]] = true;
-      if ((u[0] - 1 >= 0) && (!visited[u[0] - 1][u[1]])) Q.push([u[0] - 1, u[1]]);
-      if ((u[1] + 1 < G[1].length) && (!visited[u[0]][u[1] + 1])) Q.push([u[0], u[1] + 1]);
-      if ((u[0] + 1 < G.length) && (!visited[u[0] + 1][u[1]])) Q.push([u[0] + 1, u[1]]);
-      if ((u[1] - 1 >= 0) && (!visited[u[0]][u[1] - 1])) Q.push([u[0], u[1] - 1]);
-    }
+      if ((u[0] - 1 >= 0) && (!visited[u[0] - 1][u[1]])) {
+        Q.push([u[0] - 1, u[1]]);
+      }
+      if ((u[1] + 1 < G[1].length) && (!visited[u[0]][u[1] + 1])) {
+        Q.push([u[0], u[1] + 1]);
+      }
+      if ((u[0] + 1 < G.length) && (!visited[u[0] + 1][u[1]])) {
+        Q.push([u[0] + 1, u[1]]);
+      }
+      if ((u[1] - 1 >= 0) && (!visited[u[0]][u[1] - 1])) {
+        Q.push([u[0], u[1] - 1]);
+      }
+   }
   }
 }
 
