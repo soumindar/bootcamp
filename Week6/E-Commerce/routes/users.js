@@ -2,27 +2,22 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../controller/users.controller');
 const usersValidator = require('../middleware/validator/users.validator');
+const jwtVerify = require('../middleware/jwt');
 
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-
-// register
-router.post('/register', usersValidator.registerData, usersController.register);
-
-// login
-router.post('/login', usersValidator.loginData, usersController.login);
+// use jwt verification
+router.use(jwtVerify);
 
 // get all user
 router.get('/getall', usersValidator.queryPage, usersController.getAll);
 
 // get user by id
-router.get('/:id', usersValidator.paramId, usersController.getUserById);
+router.get('/:id', usersValidator.paramIdPagination, usersController.getUserById);
 
 // update user by id
-router.put('/:id', usersValidator.updateData, usersController.updateUser);
+router.put('/edit', usersController.updateUser);
+
+// delete user by id
+router.delete('/remove', usersController.deleteUser);
+
 
 module.exports = router;

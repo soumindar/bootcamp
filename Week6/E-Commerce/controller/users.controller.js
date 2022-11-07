@@ -1,7 +1,8 @@
 const { sequelize } = require('../db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-
+// register controller
 const register = async (req, res) => {
   const { nama, username, password } = req.body;
 
@@ -44,70 +45,82 @@ const register = async (req, res) => {
   })
 }
 
+// login controller
 const login = async (req, res) => {
-  const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
 
-  const getUser = await sequelize.query(
-    'SELECT id, username, password FROM users WHERE username = :username',
-    {
-      replacements: {
-        username
+    const getUser = await sequelize.query(
+      'SELECT id, username, password, is_delete FROM users WHERE username = :username',
+      {
+        replacements: {
+          username
+        }
       }
-    }
-  );
-  
-  const user = getUser[0][0];
+    );
+    
+    const user = getUser[0][0];
 
-  if (!user) {
-    return res.status(404).json({
-      message: 'username not found',
-      statusCode: 404
+    if (!user) {
+      return res.status(404).json({
+        message: 'username not found',
+        statusCode: 404
+      });
+    }
+
+    if (user.is_delete) {
+      return res.status(404).json({
+        message: 'user not found',
+        statusCode: 404
+      });
+    }
+
+    const passwordMatch = await bcrypt.compareSync(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(400).json({
+        message: 'wrong password',
+        statusCode: 400
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        _id: user.id
+      },
+      process.env.SECRET,
+      {
+        expiresIn: "2h"
+      }
+    );
+
+    await sequelize.query(
+      'UPDATE users SET tokens = :token WHERE id = :user_id',
+      {
+        replacements: {
+          token,
+          user_id: user.id,
+        }
+      }
+    );
+
+    return res.status(200).json({
+      message: 'login success',
+      statusCode: 200,
+      data: {
+        user_id: user.id,
+        token
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      statusCode: 500
     });
   }
-
-  const passwordMatch = await bcrypt.compareSync(password, user.password);
-
-  if (!passwordMatch) {
-    return res.status(400).json({
-      message: 'wrong password',
-      statusCode: 400
-    });
-  }
-
-  return res.status(200).json({
-    message: 'login success',
-    statusCode: 200,
-    data: {
-      user_id: user.id
-    }
-  });
 }
 
-// const updatePut = async (req, res) => {
-//   const { nama, username, password } = req.body;
-
-//   const getUser = await sequelize.query(
-//     'SELECT username, password FROM users WHERE username = :username',
-//     {
-//       replacements: {
-//         username
-//       }
-//     }
-//   );
-  
-//   const user = getUser[0][0];
-//   if (!user) {
-//     return res.status(404).json({
-//       message: 'user not found',
-//       statusCode: 404
-//     });
-//   }
-  
-//   await sequelize.query(
-//     'UPDATE '
-//   )
-// }
-
+// get all users controller
 const getAll = async (req, res) => {
   const { pagination, page } = req.query;
 
@@ -147,6 +160,7 @@ const getAll = async (req, res) => {
   });
 }
 
+// get user by id controller
 const getUserById = async (req, res) => {
   const { id } = req.params;
 
@@ -176,9 +190,10 @@ const getUserById = async (req, res) => {
   });
 }
 
+// update user controller
 const updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.user_id;
     const { nama, username } = req.body;
 
     const idExist = await sequelize.query(
@@ -226,7 +241,49 @@ const updateUser = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'success',
+      message: 'update success',
+      statusCode: 200
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      statusCode: 500
+    });
+  }
+}
+
+// delete user controller
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.user.user_id;
+
+    const idExist = await sequelize.query(
+      'SELECT id FROM users WHERE id = :id',
+      {
+        replacements: {
+          id
+        }
+      }
+    );
+
+    if (!idExist[0][0]) {
+      return res.status(404).json({
+        message: 'id not found',
+        statusCode: 404
+      });
+    }
+
+    await sequelize.query(
+      'UPDATE users SET is_delete = true, deleted_at = now() WHERE id = :id',
+      {
+        replacements: {
+          id
+        }
+      }
+    );
+
+    return res.status(200).json({
+      message: 'delete success',
       statusCode: 200
     });
   } catch (error) {
@@ -243,4 +300,5 @@ module.exports = {
   getAll,
   getUserById,
   updateUser,
+  deleteUser,
 }
