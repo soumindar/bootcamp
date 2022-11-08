@@ -2,8 +2,8 @@ const { body, param, query, validationResult } = require('express-validator');
 
 // query pagination validator
 const queryPage = [
-  query('pagination').optional().isInt({min: 1}).withMessage('pagination must be integer bigger than 0'),
-  query('page').optional().isInt({min: 1}).withMessage('page must be integer bigger than 0'),
+  query('pagination').optional().isInt({min: 1}).withMessage('pagination must be integer larger than 0'),
+  query('page').optional().isInt({min: 1}).withMessage('page must be integer larger than 0'),
   query('start_date').optional().isDate().withMessage('start_date format is invalid'),
   query('end_date').optional().isDate().withMessage('end_date format is invalid'),
   query('order').optional().matches(/^((asc)|(desc))$/).withMessage('order can only be "asc" or "desc"'),

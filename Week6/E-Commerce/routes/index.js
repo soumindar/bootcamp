@@ -3,6 +3,7 @@ const router = express.Router();
 const authRoute = require('./auth');
 const usersRoute = require('./users');
 const transaksiRouter = require('./transaksi');
+const barangRouter = require('./barang');
 
 
 /* GET home page. */
@@ -13,5 +14,6 @@ router.get('/', function(req, res, next) {
 router.use('/auth', authRoute);
 router.use('/users', usersRoute);
 router.use('/transaksi', transaksiRouter);
+router.use('/barang', barangRouter);
 
 module.exports = router;
