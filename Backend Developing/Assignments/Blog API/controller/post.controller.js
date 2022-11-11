@@ -5,11 +5,12 @@ const userTimezone = require('../config/timezone.config');
 // get data controller
 const getData = async (req, res) => {
   try {
-    const { pagination, page, category, start_date, end_date, order_by, order } = req.query;
+    const { pagination, page, search, category, start_date, end_date, order_by, order } = req.query;
 
     const limit = pagination ?? 3;
     const pages = page ?? 1;
     const offset = (pages - 1) * limit;
+    const searchKey = `%${search}%` ?? '%';
     const categoryKey = category ?? null;
     const startDate = start_date ?? null;
     const endDate = end_date ?? null;
@@ -37,11 +38,11 @@ const getData = async (req, res) => {
     const getPost = await sequelize.query(
       `SELECT
           p.id as post_id,
-          p.category_id,
-          c.category as category_name,
           p.user_id,
           u.name,
           u.username,
+          p.category_id,
+          c.category as category_name,
           p.title,
           p.contents,
           p.created_at,
@@ -53,7 +54,14 @@ const getData = async (req, res) => {
           ON p.user_id = u.id
         WHERE
           p.is_deleted = false
-          AND (c.category = :categoryKey OR :categoryKey IS NULL)
+          AND (
+            (p.title ILIKE :searchKey)
+            OR (p.contents ILIKE :searchKey)
+          )
+          AND (
+            (c.category = :categoryKey)
+            OR (:categoryKey IS NULL)
+          )
           AND (
             (:startDate IS NULL AND :endDate IS NULL)
             OR (DATE(p.created_at) = :startDate)
@@ -64,6 +72,7 @@ const getData = async (req, res) => {
         OFFSET :offset`,
       {
         replacements: {
+          searchKey,
           categoryKey,
           startDate,
           endDate,
@@ -84,7 +93,14 @@ const getData = async (req, res) => {
           ON p.user_id = u.id
         WHERE
           p.is_deleted = false
-          AND (c.category = :categoryKey OR :categoryKey IS NULL)
+          AND (
+            (p.title ILIKE :searchKey)
+            OR (p.contents ILIKE :searchKey)
+          )
+          AND (
+            (c.category = :categoryKey)
+            OR (:categoryKey IS NULL)
+          )
           AND (
             (:startDate IS NULL AND :endDate IS NULL)
             OR (DATE(p.created_at) = :startDate)
@@ -92,6 +108,7 @@ const getData = async (req, res) => {
           )`,
       {
         replacements: {
+          searchKey,
           categoryKey,
           startDate,
           endDate
@@ -111,6 +128,57 @@ const getData = async (req, res) => {
         data_amount: Number(dataAmount),
         max_page: Number(maxPage)
       }
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      statusCode: 500
+    });
+  }
+}
+
+// get by id controller
+const getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const getPost = await sequelize.query(
+      `SELECT
+          p.id as post_id,
+          p.user_id,
+          u.name,
+          u.username,
+          p.category_id,
+          c.category as category_name,
+          p.title,
+          p.contents,
+          p.created_at,
+          p.updated_at
+        FROM post as p
+        LEFT JOIN category as c
+          ON p.category_id = c.id
+        LEFT JOIN users as u
+          ON p.user_id = u.id
+        WHERE p.id = :id AND p.is_deleted = false`,
+      {
+        replacements: {
+          id,
+        }
+      }
+    );
+
+    if (!getPost[0][0]) {
+      return res.status(404).json({
+        message: 'post not found',
+        statusCode: 404,
+        data: {}
+      });
+    }
+
+    return res.status(200).json({
+      message: 'success',
+      statusCode: 200,
+      data: getPost[0][0]
     });
   } catch (error) {
     return res.status(500).json({
@@ -292,6 +360,7 @@ const deletePost = async (req, res) => {
 module.exports = {
   createPost,
   getData,
+  getById,
   editPost,
   deletePost,
 }

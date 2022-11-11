@@ -123,6 +123,32 @@ const login = async (req, res) => {
   }
 }
 
+// logout controller
+const logout = async (req, res) => {
+  try {
+    const id = req.user.id;
+
+    await sequelize.query(
+      'UPDATE users SET token = NULL WHERE id = :id',
+      {
+        replacements: {
+          id
+        }
+      }
+    );
+
+    return res.status(200).json({
+      message: 'logout success',
+      statusCode: 200
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      statusCode: 500
+    });
+  }
+}
+
 // get user data controller
 const getData = async (req, res) => {
   try {
@@ -164,22 +190,6 @@ const updateUser = async (req, res) => {
   try {
     const id = req.user.id;
     const { name, username } = req.body;
-
-    const idExist = await sequelize.query(
-      'SELECT id FROM users WHERE id = :id AND is_deleted = false',
-      {
-        replacements: {
-          id
-        }
-      }
-    );
-    
-    if (!idExist[0][0]) {
-      return res.status(404).json({
-        message: 'id not found',
-        statusCode: 404
-      });
-    }
 
     const usernameExist = await sequelize.query(
       'SELECT username FROM users WHERE username = :username AND id <> :id',
@@ -320,6 +330,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   register,
   login,
+  logout,
   getData,
   updateUser,
   changePass,

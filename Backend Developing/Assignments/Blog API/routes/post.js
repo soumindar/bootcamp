@@ -10,6 +10,9 @@ router.use(jwtVerify);
 // get data
 router.get('/', postValidator.queryData, postController.getData);
 
+// get by id
+router.get('/:id', postValidator.paramId, postController.getById);
+
 // create post
 router.post('/create', postValidator.createData, postController.createPost);
 

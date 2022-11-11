@@ -10,6 +10,9 @@ router.use(jwtVerify);
 // get user data
 router.get('/', usersController.getData);
 
+// logout
+router.get('/logout', usersController.logout);
+
 // update user data
 router.patch('/update-data', usersValidator.updateData, usersController.updateUser);
 
