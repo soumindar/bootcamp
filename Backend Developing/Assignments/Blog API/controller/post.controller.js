@@ -188,6 +188,8 @@ const getById = async (req, res) => {
   }
 }
 
+
+// get by user controller
 // create post controller
 const createPost = async (req, res) => {
   try {

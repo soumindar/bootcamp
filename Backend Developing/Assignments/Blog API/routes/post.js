@@ -13,6 +13,9 @@ router.get('/', postValidator.queryData, postController.getData);
 // get by id
 router.get('/:id', postValidator.paramId, postController.getById);
 
+// get by user
+router.get('/user', postValidator.queryId, )
+
 // create post
 router.post('/create', postValidator.createData, postController.createPost);
 

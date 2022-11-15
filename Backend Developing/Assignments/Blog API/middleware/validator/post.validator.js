@@ -54,8 +54,25 @@ const paramId = [
   }
 ];
 
+const queryId = [
+  query('id').optional().isInt({min: 1}).withMessage('id must be integer larger than 0'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        message: errors.array(),
+        statusCode: 400
+      });
+    }
+
+    next();
+  }
+];
+
 module.exports = {
   queryData,
   createData,
   paramId,
+  queryId,
 };
